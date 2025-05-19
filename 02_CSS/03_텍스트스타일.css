@@ -1,0 +1,15 @@
+/* font-family */
+#ff1 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+#ff2 {
+  font-family: "궁서", serif;
+}
+#ff3 {
+  font-family: "돋움", sans-serif;
+}
+#ff4 {
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
