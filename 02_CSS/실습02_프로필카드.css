@@ -1,0 +1,59 @@
+body {
+  color: white;
+  background-color: blueviolet;
+}
+
+#profile {
+  width: 300px;
+  height: 360px;
+  margin: auto;
+  margin-top: 20px;
+  border: 2px solid white;
+  border-radius: 5%;
+  position: relative;
+}
+
+#img {
+  margin: auto;
+  margin-top: 5%;
+  width: 150px;
+  height: 150px;
+  background-image: url(assets/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  border-radius: 50%;
+}
+
+#name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 5%;
+}
+
+.link-outer-box {
+  width: 100%;
+  height: 130px;
+  margin-top: 20px;
+}
+
+#link-box {
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  line-height: 45px;
+  text-decoration: none;
+  width: 90%;
+  height: 45px;
+  margin: auto;
+  margin-bottom: 12px;
+  border: 2px solid white;
+  display: block;
+}
+
+#link-box:hover {
+  background-color: white;
+  color: black;
+  font-weight: 600;
+}
