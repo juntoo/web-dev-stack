@@ -1,0 +1,63 @@
+body {
+  display: flex;
+}
+
+header {
+  width: 300px;
+  position: fixed;
+  height: 100vh;
+
+  background-image: url(assets/background.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  color: white;
+  font-size: 5rem;
+  border-bottom: 1px solid white;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+header nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+header nav a {
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: underline;
+  padding: 5px;
+}
+
+main {
+  display: flex;
+  padding-left: 300px;
+  flex-direction: column;
+}
+
+main h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 15px;
+}
+
+main img {
+  width: 400px;
+  height: 300px;
+  padding: 10px;
+  align-self: center;
+}
+
+main p {
+  line-height: 1.5;
+  padding: 10px;
+}

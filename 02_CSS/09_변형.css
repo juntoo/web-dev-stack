@@ -1,0 +1,117 @@
+section {
+  display: flex;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  background-color: antiquewhite;
+  color: white;
+  line-height: 150px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  margin: auto;
+}
+.transition {
+  background-color: cadetblue;
+  /* transition: all 2s; */
+  /* transition-property: background-color, font-size; */
+  /* 
+    property : 속성 명시, duration : 전환 시간,
+    timing-function : 전환 속도 곡선, delay : 변환 시간 지연 
+  */
+  transition-property: all;
+  transition-duration: 2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0.5s;
+  transition: all 2s ease-in-out 0.5s;
+}
+.transition:hover {
+  background-color: slateblue;
+  font-size: 1.5rem;
+  transform: scale(1.5) rotate(15deg);
+  border-radius: 50%;
+}
+
+/* transform */
+.transform-scale {
+  background-color: darkgray;
+}
+.transform-scale:hover {
+  /* scale : 크기 확대 */
+  transform: scale(1.2);
+}
+.transform-rotate {
+  background-color: violet;
+}
+.transform-rotate:hover {
+  /* rotate : 회전 */
+  transform: rotate(45deg);
+}
+.transform-translate {
+  background-color: green;
+}
+.transform-translate:hover {
+  /* translate : 이동(x, y) */
+  transform: translate(40px, 20px);
+}
+.transform-skew {
+  background-color: coral;
+}
+.transform-skew:hover {
+  /* skew : 기울이기 */
+  transform: skew(10deg, 20deg);
+}
+
+/* animation */
+@keyframes bounce {
+  0% {
+    transform: translate(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: translate(25px, 50px);
+  }
+}
+@keyframes bounce2 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
+}
+.animation-once {
+  background-color: mediumspringgreen;
+  /* animation: 애니메이션명 지속시간 속도곡선 횟수 */
+  animation: bounce 2s ease-in-out 3;
+}
+.animation-alternate {
+  background-color: cornflowerblue;
+  animation: bounce 1s ease-in-out infinite alternate;
+}
+.animation-reverse {
+  background-color: red;
+  animation: bounce 2s ease-in-out reverse;
+}
+.animation-paused {
+  background-color: chartreuse;
+  animation: bounce2 2s linear infinite;
+}
+.animation-paused:hover {
+  animation-play-state: paused;
+}
+
+/* 3D */
+.perspective-container {
+  perspective: 600px;
+}
+.perspective-container .box {
+  transition: tranform 2s;
+}
+.perspective-container .box:hover {
+  transform: translateY(100%);
+}
