@@ -6,13 +6,22 @@
     <title>변수 & 연산자 연습문제</title>
   </head>
   <body>
+    <!-- 
+      변수 명명 규칙
+      1) 문자, 숫자, 기호는 $, _ 만 사용
+      2) 첫글자에는 숫자 금지
+      3) 예약어(const, if, switch...) 금지
+      4) 표기법대로 사용 - camelCase(낙타표기법)
+      5) 상수(const로 표시한 것 X)는 대문자 + SNAKE_CASE(_바 표기법)
+    -->
     <h1>변수 & 연산자 연습문제</h1>
     <ol style="line-height: 2">
       <li>
         킬로그램(kg)을 파운드(lb)로 환산하여 console에 출력하시오. (1kg = 2.2lb)
         <script>
           const kg = 60;
-          console.log(`${kg * 2.2}lb`);
+          const lb = kg * 2.2;
+          console.log(`${lb}lb`);
         </script>
       </li>
 
@@ -20,7 +29,8 @@
         제곱미터(㎡)를 평(평수)으로 환산하여 출력하시오. (1㎡ = 0.3평)
         <script>
           const m2 = 99;
-          console.log(`${m2 * 0.3}평`);
+          const pyeong = m2 * 0.3;
+          console.log(`${pyeong}평`);
         </script>
       </li>
 
@@ -30,7 +40,8 @@
           const upper = 10;
           const lower = 14;
           const height = 4;
-          console.log(((upper + lower) / 2) * height);
+          const sadari = ((upper + lower) / 2) * height;
+          console.log(sadari);
         </script>
       </li>
 
@@ -38,7 +49,9 @@
         예금 12,000,000원을 연이율 4%로 정기예금했을 때 월 이자를 구하시오.
         <script>
           const yegum = 12000000;
-          console.log(((yegum / 100) * 4) / 12);
+          const rate = 0.04;
+          const wor = (yegum * rate) / 12;
+          console.log(wor);
         </script>
       </li>
 
@@ -47,7 +60,8 @@
         <script>
           const year = 2025;
           const age = 28;
-          console.log(year - age + 1);
+          const birth = year - age + 1;
+          console.log(birth);
         </script>
       </li>
 
@@ -57,9 +71,9 @@
         <script>
           const coffee = 5500;
           const money = 15000;
-          console.log(
-            `${parseInt(money / coffee)}잔, 잔돈 : ${money % coffee}원`
-          );
+          const maxCup = parseInt(money / coffee);
+          const jandon = money % coffee;
+          console.log(`${maxCup}잔, 잔돈 : ${jandon}원`);
         </script>
       </li>
 
@@ -71,9 +85,9 @@
           const eatYang = 64;
           const juice = 2000;
           const eatJuice = 6;
-          console.log(
-            yang * eatYang + juice * eatJuice - parseInt(eatYang / 10) * juice
-          );
+          const service = parseInt(eatYang / 10);
+          const total = yang * eatYang + juice * (eatJuice - service);
+          console.log(total);
         </script>
       </li>
 
@@ -81,9 +95,10 @@
         두 자리 정수(예: 73)의 각 자릿수를 더한 값을 구하시오. (7 + 3 = 10)
         <script>
           const a = 47,
-            b = 68;
-          console.log(parseInt(a / 10) + (a % 10));
-          console.log(parseInt(b / 10) + (b % 10));
+            ten = parseInt(a / 10),
+            one = a % 10,
+            sum = ten + one;
+          console.log(sum);
         </script>
       </li>
 
