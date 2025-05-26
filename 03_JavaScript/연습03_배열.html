@@ -47,6 +47,7 @@
           );
           // [OST]
           console.log(music[music.indexOf("OST")]);
+          console.log(music.slice(music.indexOf("OST")));
         </script>
       </li>
 
@@ -81,9 +82,8 @@
         <script>
           const dupArr = [1, 2, 2, 3, 3, 3];
           // [1, 2, 3]
-          const unique = new Set(dupArr);
-          const uniqueArr = [...unique];
-          console.log(uniqueArr);
+          const unique = [...new Set(dupArr)];
+          console.log(unique);
         </script>
       </li>
     </ol>
