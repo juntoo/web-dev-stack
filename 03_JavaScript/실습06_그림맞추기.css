@@ -1,0 +1,63 @@
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#title {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 40px;
+}
+
+#describe {
+}
+
+#imgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#imgContainer img {
+  width: 200px;
+  border-radius: 50%;
+  margin: 30px 20px;
+}
+/* 
+#img1 {
+  background-image: url(assets/spy1.jpg);
+  background-size: cover;
+}
+
+#img2 {
+  background-image: url(assets/spy2.jpg);
+  background-size: cover;
+}
+
+#img3 {
+  background-image: url(assets/spy3.jpg);
+  background-size: cover;
+} */
+
+#btns {
+  display: flex;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#click {
+  padding: 20px;
+  background-color: coral;
+  color: blueviolet;
+  border-radius: 7%;
+  margin-inline: 10px;
+}
+#restart {
+  padding: 20px;
+  background-color: blueviolet;
+  color: coral;
+  border-radius: 10%;
+}

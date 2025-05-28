@@ -16,23 +16,31 @@ body {
 }
 
 #date {
-  font-size: 2rem;
+  font-size: 2.3rem;
   font-weight: bold;
 }
 
 #time {
-  font-size: 4rem;
+  margin: 20px 0 30px;
+  font-size: 4.5rem;
   font-weight: bold;
 }
 
 #leftTime {
-  font-size: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-#saying {
+#sayingEn {
   font-size: 1.5rem;
   font-weight: 700;
-  width: 65%;
-  height: 5vh;
+  width: 80%;
+  text-align: center;
+}
+#sayingKo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 80%;
   text-align: center;
 }
