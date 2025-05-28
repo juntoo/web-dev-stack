@@ -12,9 +12,6 @@ body {
   padding: 40px;
 }
 
-#describe {
-}
-
 #imgContainer {
   display: flex;
   justify-content: center;
@@ -23,24 +20,11 @@ body {
 
 #imgContainer img {
   width: 200px;
+  height: 200px;
   border-radius: 50%;
   margin: 30px 20px;
+  object-fit: cover;
 }
-/* 
-#img1 {
-  background-image: url(assets/spy1.jpg);
-  background-size: cover;
-}
-
-#img2 {
-  background-image: url(assets/spy2.jpg);
-  background-size: cover;
-}
-
-#img3 {
-  background-image: url(assets/spy3.jpg);
-  background-size: cover;
-} */
 
 #btns {
   display: flex;
@@ -60,4 +44,10 @@ body {
   background-color: blueviolet;
   color: coral;
   border-radius: 10%;
+}
+
+#celebration {
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
