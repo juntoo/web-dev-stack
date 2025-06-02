@@ -47,7 +47,7 @@ function btn6() {
 function btn7() {
   const div = document.querySelector("#testId");
   // 속성 추가
-  div.setAttribute("data-test", "테스트");
+  div.ribute("data-test", "테스트");
   // 속성 값 가져오기
   console.log(div.getAttribute("data-test"));
   console.log(div.getAttribute("class"));
