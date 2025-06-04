@@ -368,5 +368,6 @@ SELECT NULLIF('123', '123'), NULLIF('123', '456') FROM DUAL;
 */
 -- EMPLOYEE에서 주민번호(EMP_NO)로 성별(남, 여)조회
 SELECT
-    EMP_NO
+    EMP_NO,
+    DECODE(SUBSTR(EMP_NO, 8, 1), 1, '남', 2, '여')
 FROM EMPLOYEE;
