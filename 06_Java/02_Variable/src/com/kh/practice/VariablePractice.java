@@ -74,12 +74,17 @@ public class VariablePractice {
 		System.out.print("두번째 정수 입력 : ");
 		int secondNum = Integer.parseInt(sc.nextLine());
 		
+		int plus = firstNum + secondNum;
+		int minus = firstNum - secondNum;
+		int multiply = firstNum * secondNum;
+		int division = firstNum / secondNum;
+		
 		System.out.println("첫 번째 정수 : " + firstNum);
 		System.out.println("두 번째 정수 : " + secondNum);
-		System.out.println("더하기 : " + (firstNum + secondNum));
-		System.out.println("빼기 : " + (firstNum - secondNum));
-		System.out.println("곱하기 : " + (firstNum * secondNum));
-		System.out.println("나누기 몫 : " + (firstNum / secondNum));
+		System.out.println("더하기 : " + plus);
+		System.out.println("빼기 : " + minus);
+		System.out.println("곱하기 : " + multiply);
+		System.out.println("나누기 몫 : " + division);
 	}
 
 	/*
@@ -99,10 +104,13 @@ public class VariablePractice {
 		System.out.print("세로 길이 입력 : ");
 		double height = Double.parseDouble(sc.nextLine());
 		
+		double area = width * height;
+		double round  = (width + height) * 2;
+		
 		System.out.println("가로 : " + width);
 		System.out.println("세로 : " + height);
-		System.out.println("면적 : " + (width * height));
-		System.out.println("둘레 : " + ((width + height) * 2));
+		System.out.println("면적 : " + area);
+		System.out.println("둘레 : " + round);
 	}
 
 	/*
@@ -117,9 +125,13 @@ public class VariablePractice {
 		System.out.print("문자열을 입력하세요 : ");
 		String str = sc.nextLine();
 		
-		System.out.println("첫번째 문자 : " + str.charAt(0));
-		System.out.println("두번째 문자 : " + str.charAt(1));
-		System.out.println("마지막 문자 : " + str.charAt(str.length()-1));
+		char chFirst = str.charAt(0);
+		char chSecond = str.charAt(1);
+		char chLast = str.charAt(str.length()-1);
+		
+		System.out.println("첫번째 문자 : " + chFirst);
+		System.out.println("두번째 문자 : " + chSecond);
+		System.out.println("마지막 문자 : " + chLast);
 	}
 
 	/*
@@ -133,9 +145,11 @@ public class VariablePractice {
 		System.out.print("문자 하나 입력 : ");
 		char ch = sc.nextLine().charAt(0);
 		
+		int ch2 = ch + 1;
+		
 		System.out.println("문자 : " + ch);
 		System.out.println(ch + " unicode : " + (int) ch);
-		System.out.println((char)(ch + 1) + " unicode : " + (ch + 1));
+		System.out.println((char)ch2 + " unicode : " + ch2);
 	}
 	
 	/*
@@ -164,7 +178,7 @@ public class VariablePractice {
 		System.out.println("영어 : " + eng);
 		System.out.println("수학 : " + math);
 		System.out.println("총점 : " + total);
-		System.out.println("평균 : " + avr);
+		System.out.printf("평균 : %.2f", avr);
 		
 	}
 
