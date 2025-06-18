@@ -1,6 +1,5 @@
 package com.kh.practice;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class ConditionPractice {
@@ -29,7 +28,7 @@ public class ConditionPractice {
        양수만 입력해주세요.
      */
     public void method1() {
-    	System.out.print("숫자를 입력해주세요 : ");
+    	System.out.print("숫자를 한 개 입력하세요 : ");
     	int number = Integer.parseInt(sc.nextLine());
     	
     	if(number >= 0) {

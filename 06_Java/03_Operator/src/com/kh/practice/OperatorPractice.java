@@ -15,8 +15,8 @@ public class OperatorPractice {
 //		o.method4();
 //		o.method5();
 //		o.method6();
-		o.method7();
-//		o.method8();
+//		o.method7();
+		o.method8();
 		
 	}
 
@@ -28,7 +28,7 @@ public class OperatorPractice {
 		System.out.print("연필 개수 : ");
 		int pencil = Integer.parseInt(sc.nextLine());
 		
-		int division = pencil /people; // 몫
+		int division = pencil / people; // 몫
 		int remaind = pencil % people; // 나머지
 		
 		System.out.println("인당 나눠가진 연필 개수 : " + division);
@@ -97,7 +97,8 @@ public class OperatorPractice {
 		System.out.print("바구니의 크기 입력 : ");
 		int bucket = Integer.parseInt(sc.nextLine());
 		
-		int needBucket = apple % bucket == 0 ? apple / bucket : apple / bucket + 1;
+//		int needBucket = apple % bucket == 0 ? apple / bucket : apple / bucket + 1;
+		int needBucket = (apple / bucket) + (apple % bucket == 0 ? 0 : 1);
 		System.out.println("필요한 바구니 수 : " + needBucket);
 	}
 	

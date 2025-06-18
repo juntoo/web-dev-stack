@@ -27,7 +27,9 @@ public class VariablePractice {
 	public void method1() {
 		int adult = 10000;
 		int teen = 7000;
-		System.out.println(adult * 2 + teen * 3);
+		int adultCount = 2;
+		int teenCount = 3;
+		System.out.println(adult * adultCount + teen * teenCount);
 	}
 	
 	/*
@@ -105,11 +107,11 @@ public class VariablePractice {
 		double height = Double.parseDouble(sc.nextLine());
 		
 		double area = width * height;
-		double round  = (width + height) * 2;
+		double round = (width + height) * 2;
 		
 		System.out.println("가로 : " + width);
 		System.out.println("세로 : " + height);
-		System.out.println("면적 : " + area);
+		System.out.println("면적 : " + String.format("%.2f", area));
 		System.out.println("둘레 : " + round);
 	}
 
