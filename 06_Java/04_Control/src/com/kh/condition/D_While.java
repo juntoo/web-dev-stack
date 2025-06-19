@@ -86,7 +86,7 @@ public class D_While {
 				System.out.println(random + " 정답!");
 				break;
 			}
-			System.out.println("max : " + max + ", min : " + min);
+//			System.out.println("max : " + max + ", min : " + min);
 			
 		}
 		
@@ -176,12 +176,12 @@ public class D_While {
 	public static void main(String[] args) {
 		D_While d = new D_While();
 		
-//		d.method1();
-//		d.method2();
-//		d.method3();
+		d.method1();
+		d.method2();
+		d.method3();
 		d.method4();
-//		d.method5();
-//		d.method6();
+		d.method5();
+		d.method6();
 	}
 
 }
