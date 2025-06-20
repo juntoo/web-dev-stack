@@ -1,8 +1,14 @@
 package com.kh.practice;
 
+import java.awt.Container;
+import java.lang.ModuleLayer.Controller;
 import java.util.Arrays;
 
 import java.util.Scanner;
+
+import com.kh.practice.controller.RockPaperScissorController;
+import com.kh.practice.model.RockPaperScissor;
+import com.kh.practice.view.RockPaperScissorView;
 
 class LoopPractice {
 	
@@ -11,11 +17,11 @@ class LoopPractice {
 	public static void main(String[] args) {
 
 		LoopPractice l = new LoopPractice();
-		l.method1();
-		l.method2();
-		l.method3();
-		l.method4();
-		l.method5();
+//		l.method1();
+//		l.method2();
+//		l.method3();
+//		l.method4();
+//		l.method5();
 		l.method6();
 		
 	}
@@ -40,15 +46,15 @@ class LoopPractice {
 
     // 1+(-2)+3+(-4)+...과 같은 식으로 계속 더해나갔을 때, 몇까지 더해야 총합이 100 이상 되는지 출력하시오.
     public void method2() {
-    	int num = 1;
+    	int num = 0;
     	int sum = 0;
     	
     	while(true) {
+    		num++;
     		if(num % 2 == 0) sum -= num;
     		else sum += num;
-    		num++;
     		
-    		if(sum == 100) {
+    		if(sum >= 100) {
     			System.out.println(num);
     			break;
     		}
@@ -90,13 +96,11 @@ class LoopPractice {
         0
      */
     public void method4() {
-    	int number = 0;
-    	
     	while(true) {
     		int random = (int) (Math.random() * 11);
     		System.out.println(random);
     		
-    		if(number == random) break;
+    		if(random == 0) break;
     	}
     }
 
@@ -112,16 +116,16 @@ class LoopPractice {
 
      */
     public void method5() {
-    	int arr[] = {0, 0, 0, 0, 0, 0};
+    	int arr[] = new int[6];
     	
     	for(int i = 0; i < 10; i++) {
     		int random = (int) (Math.random() * 6);
-    		arr[random] += 1;
+    		arr[random]++;
     	}
 
     	for(int i = 0; i < arr.length; i++) {
-    		System.out.println(i + 1 + " : " + arr[i]);
-    	}
+    		System.out.println((i + 1) + " : " + arr[i]);
+    	}    	
     }
 
     /*
@@ -147,47 +151,10 @@ class LoopPractice {
 	    비긴 횟수 : 1, 진 횟수 : 1, 이긴 횟수 : 1
     */
     public void method6() {
-    	System.out.print("당신의 이름을 입력해주세요 : ");
-    	String name = sc.nextLine();
     	
-    	String com = "";
-    	String user = "";
+    	RockPaperScissorView View = new RockPaperScissorView();
     	
-    	int rps = 0;
-    	int draw = 0;
-    	int lose = 0;
-    	int win = 0;
-    	
-    	while(true) {
-	    	System.out.print("가위바위보 : ");
-	    	user = sc.nextLine();
-	    	
-	    	if(user.equals("가위")) rps = 0;
-	    	else if(user.equals("바위")) rps = 1;
-	    	else if(user.equals("보")) rps = 2;
-	    	else rps = 100;
-	    	
-	    	int random = (int)(Math.random() * 3);
-	    	if(random == 0) com = "가위";
-	    	else if(random == 1) com = "바위";
-	    	else com = "보";
-	    	
-	    	System.out.println("컴퓨터 : " + com);
-	    	System.out.println(name + " : " + user);
-	    	
-	    	if(rps - random == 0) {
-	    		System.out.printf("비겼습니다.\n\n");
-	    		draw++;
-	    	}else if(rps - random == -1 || rps - random == 2) {
-	    		System.out.printf("졌습니다ㅠㅠ\n\n");
-	    		lose++;
-	    	}else if(rps - random == 1 || rps - random == -2) {
-	    		System.out.println("이겼습니다 !");
-	    		win++;
-	    		System.out.printf("비긴 횟수 : %d, 진 횟수 : %d, 이긴 횟수 : %d", draw, lose, win);
-	    		break;
-	    	}else System.out.printf("가위 바위 보 만 입력 해주세요\n\n");
-    	}
+    	View.gameStart();
     	
     }
 
