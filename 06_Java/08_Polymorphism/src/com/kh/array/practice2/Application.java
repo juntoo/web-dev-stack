@@ -1,9 +1,5 @@
 package com.kh.array.practice2;
 
-import java.util.Scanner;
-
-import com.kh.array.practice2.controller.MemberController;
-import com.kh.array.practice2.model.Member;
 import com.kh.array.practice2.view.MemberView;
 
 public class Application {
@@ -44,7 +40,7 @@ public class Application {
 		 * 메뉴 번호 : 
 		 * */
 		MemberView view = new MemberView();
-		view.view();
+		view.main();
 	}
 
 }

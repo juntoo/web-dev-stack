@@ -5,7 +5,7 @@ import java.util.Scanner;
 import com.kh.array.practice2.controller.MemberController;
 
 public class MemberView {
-	public void view() {
+	public void main() {
 		Scanner sc = new Scanner(System.in);
 		MemberController controller = new MemberController();
 		boolean isTrue = true;
@@ -18,6 +18,7 @@ public class MemberView {
 			char gender;
 			int age;
 			
+			System.out.println("현재 등록된 회원 수는 " + controller.memberCount() + "명 입니다");
 			if(controller.checkFull() == false) System.out.println("1. 새 회원 등록");
 			else System.out.println("회원 수가 모두 꽉 찼기 때문에 일부 메뉴만 오픈합니다.");
 			System.out.println("2. 회원 정보 수정");
@@ -57,11 +58,11 @@ public class MemberView {
 						System.out.println("회원 정보가 없습니다.");
 						break;
 					}
-					System.out.print("이름 : ");
+					System.out.print("수정할 이름 : ");
 					name = sc.nextLine();
-					System.out.print("이메일 : ");
+					System.out.print("수정할 이메일 : ");
 					email = sc.nextLine();
-					System.out.print("비밀번호 : ");
+					System.out.print("수정할 비밀번호 : ");
 					pwd = sc.nextLine();
 					System.out.println(controller.editMember(id, name, pwd, email));
 					break;
