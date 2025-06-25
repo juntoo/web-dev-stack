@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.kh.practice.controller.Controller;
+import com.kh.practice.model.UserInfo;
 
 public class Application {
 	
@@ -100,6 +101,7 @@ public class Application {
 		
 		if(controller.login(id, password) == 1) {
 			// 아이디와 비밀번호 성공했을시에만!
+			UserInfo user = new UserInfo();
 			System.out.println("직원의 어떤 정보를 수정하시겠습니까?");
 			System.out.println("1. 전화 번호");
 			System.out.println("2. 생일");

@@ -6,7 +6,7 @@ import com.kh.practice.model.Department;
 import com.kh.practice.model.UserInfo;
 
 public class Controller {
-	UserInfo userInfo = new UserInfo();
+	private UserInfo userInfo = new UserInfo();
 	Department dept = new Department();
 	
 	
