@@ -1,6 +1,5 @@
 package com.kh.list;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.kh.list.model.Person;
@@ -70,11 +69,17 @@ public class A_ArrayList {
 		System.out.println("사람 수 : " + list.size());
 		
 		// 4. remove : 해당 인덱스의 객체 삭제
-		list.remove(1);
+//		list.remove(1);
 		
 		// 5. get : 해당 인덱스의 객체 가져오기
 		System.out.println(list.get(0));
-
+		
+		String str = "군포시";
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getName().equals("기안84") == true) {
+				list.set(i, new Person("기안84", str, list.get(i).getAge()));
+			}
+		}
 		System.out.println(list);
 	}
 	

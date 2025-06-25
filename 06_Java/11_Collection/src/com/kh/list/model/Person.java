@@ -1,6 +1,8 @@
 package com.kh.list.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @NoArgsConstructor @AllArgsConstructor
 @Data

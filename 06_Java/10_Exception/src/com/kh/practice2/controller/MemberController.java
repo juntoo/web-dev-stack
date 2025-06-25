@@ -21,7 +21,20 @@ public class MemberController {
 
 	// 메서드 분리!
 	// 아이디 체크! <- 등록 할 때도 필요! 수정할 때도 필요! 여기저기 필요한 경우!
-	public int idCheck(String id) {
+	public int idCheck(String id) throws DuplicateIdException {
+
+		for (int i = 0; i < members.length; i++) {
+			if (members[i] != null && members[i].getId().equals(id)) {
+				// 기존 배열에서 아이디가 있는 경우!
+				throw new DuplicateIdException();
+			}
+		}
+
+		// 아이디가 없는 경우!
+		return -1;
+	}
+	
+	public int updateCheck(String id) throws RecordNotFoundException {
 
 		for (int i = 0; i < members.length; i++) {
 			if (members[i] != null && members[i].getId().equals(id)) {
@@ -31,11 +44,11 @@ public class MemberController {
 		}
 
 		// 아이디가 없는 경우!
-		return -1;
+		throw new RecordNotFoundException();
 	}
 
-	public void updateInfo(String id, String name, String email, String pwd) {
-		int index = idCheck(id);
+	public void updateInfo(String id, String name, String email, String pwd) throws RecordNotFoundException {
+		int index = updateCheck(id);
 		members[index].setName(name);
 		members[index].setEmail(email);
 		members[index].setPwd(pwd);
