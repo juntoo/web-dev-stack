@@ -9,7 +9,16 @@ public class Controller {
 	private UserInfo userInfo = new UserInfo();
 	Department dept = new Department();
 	
+//	private int count = 0;
 	
+//	public UserInfo login(String id, String password) {
+//		for(UserInfo user : userInfo) {
+//			if(id.equals(user.getId()) && password.equals(user.getPassword())) {
+//				return user;
+//			}
+//		}
+//		return null;
+//	}
 	
 	public void addEmp(int userNo, String id, String password, String email, String name) {
 		userInfo.setUserNo(userNo);
@@ -19,12 +28,11 @@ public class Controller {
 		userInfo.setName(name);
 	}
 	
-	public void addEmpPlus(String phone, String addr, String gender, LocalDate birthDate, String deptName) {
+	public void addEmp(String phone, String addr, String gender, LocalDate birthDate, Department dept) {
 		userInfo.setPhone(phone);
 		userInfo.setAddr(addr);
 		userInfo.setGender(gender);
 		userInfo.setBirthDate(birthDate);
-		dept.setDeptName(deptName);
 		userInfo.setDepartment(dept);
 	}
 	
@@ -33,18 +41,26 @@ public class Controller {
 		return 0;
 	}
 	
-	public void changePhone(String phone) {
-		userInfo.setPhone(phone);
+	public void updateEmp(UserInfo user) {
+		userInfo = user;
 	}
 	
-	public void changeBirthDate(LocalDate birthDate) {
-		userInfo.setBirthDate(birthDate);
+	public UserInfo user() {
+		return userInfo;
 	}
 	
-	public void changeDepartment(String deptName) {
-		dept.setDeptName(deptName);
-		userInfo.setDepartment(dept);
-	}
+//	public void changePhone(String phone) {
+//		userInfo.setPhone(phone);
+//	}
+//	
+//	public void changeBirthDate(LocalDate birthDate) {
+//		userInfo.setBirthDate(birthDate);
+//	}
+//	
+//	public void changeDepartment(String deptName) {
+//		dept.setDeptName(deptName);
+//		userInfo.setDepartment(dept);
+//	}
 	
 	public void empData() {
 		System.out.println("직원 번호 : " + userInfo.getUserNo());

@@ -4,15 +4,18 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 import com.kh.practice.controller.Controller;
+import com.kh.practice.model.Department;
+import com.kh.practice.model.DeptType;
 import com.kh.practice.model.UserInfo;
 
 public class Application {
 	
 	Scanner sc = new Scanner(System.in);
 	Controller controller = new Controller();
+	Department dept = new Department();
+	UserInfo user = new UserInfo();
 	
 	public static void main(String[] args) {
-		
 		Application app = new Application();
 		boolean check = true;
 		while(check) {
@@ -86,8 +89,9 @@ public class Application {
 			
 			System.out.print("부서 등록 : "); // 너무 어렵다면 생략!
 			String deptName = sc.nextLine();
+			dept.setDeptName(deptName);
 			
-			controller.addEmpPlus(phone, addr, gender, birthDate, deptName);
+			controller.addEmp(phone, addr, gender, birthDate, dept);
 		}
 	}
 	
@@ -101,7 +105,8 @@ public class Application {
 		
 		if(controller.login(id, password) == 1) {
 			// 아이디와 비밀번호 성공했을시에만!
-			UserInfo user = new UserInfo();
+			
+			user = controller.user();
 			System.out.println("직원의 어떤 정보를 수정하시겠습니까?");
 			System.out.println("1. 전화 번호");
 			System.out.println("2. 생일");
@@ -113,20 +118,26 @@ public class Application {
 			switch (select) {
 			case 1:
 				System.out.print("전화 번호 입력 : ");
-				controller.changePhone(sc.nextLine());
+//				controller.changePhone(sc.nextLine());
+				String phone = sc.nextLine();
+				user.setPhone(phone);
 				break;
 			case 2:
 				System.out.print("생일 입력 (예 : 2025-06-23) : ");
-				controller.changeBirthDate(LocalDate.parse(sc.nextLine()));
+//				controller.changeBirthDate(LocalDate.parse(sc.nextLine()));
+				LocalDate birthDate = LocalDate.parse(sc.nextLine());
+				user.setBirthDate(birthDate);
 				break;
 			case 3:
 				System.out.print("부서 입력 : ");
-				controller.changeDepartment(sc.nextLine());
+//				controller.changeDepartment(sc.nextLine());
+				String deptName = sc.nextLine();
+				dept.setDeptName(deptName);
 				break;
 			case 9:
 				break;
 			}
-
+			controller.updateEmp(user);
 		} else {
 			// 아이디랑 비밀번호가 틀리다면!
 			System.out.println("로그인 실패! 정보 수정할 수 없습니다");
