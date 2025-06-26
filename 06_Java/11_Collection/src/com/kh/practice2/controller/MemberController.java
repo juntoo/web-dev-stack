@@ -14,23 +14,31 @@ public class MemberController {
     public boolean login(String name, int age) {
     	if(members.isEmpty()) {
     		members.add(new Member(name, age, 1, new ArrayList<Book>()));
-    		System.out.println(members);
+    		loginMember = members.get(0);
     		return true;
     	}
     	for(Member m : members) {
-    		if(!m.getName().equals(name)) {
-    			members.add(new Member(name, age, 1, new ArrayList<Book>()));
+    		if(m.getName().equals(name) && !(m.getAge() == age)) return false;
+    	}
+    	for(Member m : members) {
+    		if(m.getName().equals(name) && m.getAge() == age) {
+    			loginMember = m;
     			return true;
-    		}else if(m.getName().equals(name) && m.getAge()==age) return true;
+    		}
+    		else if(!m.getName().equals(name)) {
+    			members.add(new Member(name, age, 1, new ArrayList<Book>()));
+    			loginMember = members.getLast();
+    			return true;
+    		}
     	}
     	return false;
     }
     
     public void logout() {
-    	
+    	loginMember = null;
     }
     
     public Member getMember() {
-    	return null;
+    	return loginMember;
     }
 }

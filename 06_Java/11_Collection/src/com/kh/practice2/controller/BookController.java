@@ -12,6 +12,21 @@ public class BookController {
 	
 	// 책 대여
 	public String rentBook(Book book, Member member) {
-		return null;
+		
+		if(member.getBookList().size() > 2) return "더 이상 대여할 수 없습니다";
+		System.out.println("test" + book.getTitle());
+		if(!bookCount.isEmpty() && bookCount.get(book.getTitle()) != null 
+				&& bookCount.get(book.getTitle()) > 2) return "3권 모두 대여중입니다";
+		for(Book b : member.getBookList()) {
+			if(b.getTitle().equals(book.getTitle())) return "이미 대여한 책입니다";
+			else if(book.getAccessAge() > member.getAge()) {
+				if(book.isCoupon() == false) return "나이 제한으로 대여 불가능 합니다";
+			}
+		}
+		member.getBookList().add(book);
+		
+		bookCount.put(book.getTitle(), bookCount.getOrDefault(book.getTitle(), 0)+1);
+		
+		return "성공적으로 대여되었습니다.";
 	}
 }
