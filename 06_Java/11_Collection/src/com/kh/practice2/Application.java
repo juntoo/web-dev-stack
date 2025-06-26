@@ -58,16 +58,20 @@ public class Application {
 		boolean run = true;
 		while(run) {
 			if(mc.getMember() == null) {
-				System.out.println();
 				System.out.print("이름 : ");
 				String name = sc.nextLine();
-				
-				System.out.print("나이 : ");
-				int age = Integer.parseInt(sc.nextLine());
-				mc.login(name, age);
-				if(mc.login(name, age)==false) {
-					System.out.println("이미 존재하는 이름입니다. 다시 입력해 주세요");
+				try {
+					System.out.print("나이 : ");
+					int age = Integer.parseInt(sc.nextLine());
+					mc.login(name, age);
+					if(mc.login(name, age)==false) {
+						System.out.println("이미 존재하는 이름입니다. 다시 입력해 주세요");
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("나이에는 숫자만 넣어주세요");
 				}
+				
+				
 			}else {
 				System.out.println("===== 메뉴 =====");
 				System.out.println("1. 마이페이지");
@@ -75,27 +79,40 @@ public class Application {
 				System.out.println("3. 로그아웃");
 				System.out.println("4. 프로그램 종료");
 				System.out.print("메뉴 선택 : ");
-				int select = Integer.parseInt(sc.nextLine());
+				try {
+					int select = Integer.parseInt(sc.nextLine());
 					
-				switch(select) {
-					case 1 : System.out.println(mc.getMember()); break;
-					case 2 : rent(); break;
-					case 3 : mc.logout(); break;
-					case 9 : return;
+					switch(select) {
+						case 1 : System.out.println(mc.getMember()); break;
+						case 2 : 
+							rent(); break;
+						case 3 : mc.logout(); break;
+						case 9 : return;
+					}
+				} catch (NumberFormatException e) {
+					System.out.println("메뉴 선택 시 숫자만 입력해주세요");
 				}
+				
 			}
 		}
 	}
 	
 	
 	public void rent() {
-		for(int i = 0; i < books.size(); i++) {
-			System.out.println((i+1) + ". " + books.get(i));
+		try {
+			for(int i = 0; i < books.size(); i++) {
+				System.out.println((i+1) + ". " + books.get(i));
+			}
+			System.out.print("대여할 도서를 선택하세요 > ");
+			int num = Integer.parseInt(sc.nextLine());
+			
+			String str = bc.rentBook(books.get(num-1), mc.getMember());
+			System.out.println(str);
+		} catch (Exception e) {
+			System.out.println("대여할 책은 범위 내에 숫자로 입력해주세요");
+			System.out.println();
+			rent();
 		}
-		System.out.print("대여할 도서를 선택하세요 > ");
-		int num = Integer.parseInt(sc.nextLine());
 		
-		String str = bc.rentBook(books.get(num-1), mc.getMember());
-		System.out.println(str);
 	}
 }
