@@ -52,6 +52,7 @@ public class Application {
 	     * 4. 프로그램 종료
 	     * */
 	    app.mainMenu();
+	    return;
 	}
 	
 	public void mainMenu() {
@@ -87,7 +88,7 @@ public class Application {
 						case 2 : 
 							rent(); break;
 						case 3 : mc.logout(); break;
-						case 9 : return;
+						case 4 : return;
 					}
 				} catch (NumberFormatException e) {
 					System.out.println("메뉴 선택 시 숫자만 입력해주세요");
@@ -103,9 +104,10 @@ public class Application {
 			for(int i = 0; i < books.size(); i++) {
 				System.out.println((i+1) + ". " + books.get(i));
 			}
+			System.out.println("0. 돌아가기");
 			System.out.print("대여할 도서를 선택하세요 > ");
 			int num = Integer.parseInt(sc.nextLine());
-			
+			if(num == 0) return;
 			String str = bc.rentBook(books.get(num-1), mc.getMember());
 			System.out.println(str);
 		} catch (Exception e) {

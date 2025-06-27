@@ -13,7 +13,7 @@ public class MemberController {
     
     public boolean login(String name, int age) {
     	if(members.isEmpty()) {
-    		members.add(new Member(name, age, 1, new ArrayList<Book>()));
+    		members.add(new Member(name, age, 0, new ArrayList<Book>()));
     		loginMember = members.get(0);
     		return true;
     	}
@@ -26,7 +26,7 @@ public class MemberController {
     			return true;
     		}
     		else if(!m.getName().equals(name)) {
-    			members.add(new Member(name, age, 1, new ArrayList<Book>()));
+    			members.add(new Member(name, age, 0, new ArrayList<Book>()));
     			loginMember = members.getLast();
     			return true;
     		}
