@@ -1,5 +1,6 @@
 package com.kh.practice3;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kh.practice3.controller.MusicController;
@@ -82,8 +83,12 @@ public class Application {
 		/*
 		 * ****** 전체 곡 목록 출력 ******
 		 * */
-		for(Music music : mc.printAll()) {
-			System.out.println(music.getArtist()+" - "+music.getSong());
+		if(mc.printAll().size() == 0) {
+			System.out.println("목록이 비어있습니다");
+		}else {
+			for(Music music : mc.printAll()) {
+				System.out.println(music.getArtist()+" - "+music.getSong());
+			}
 		}
 	}
 	
@@ -121,11 +126,26 @@ public class Application {
 		 * */
 		System.out.print("검색할 곡명 : ");
 		String song = sc.nextLine();
-		System.out.print("수정할 곡명 : ");
-		String song2 = sc.nextLine();
-		System.out.print("수정할 가수명 : ");
-		String artist = sc.nextLine();
-		System.out.println(mc.updateMusic(song, song2, artist));
+		
+		ArrayList<Music> list = new ArrayList<>();
+		list = mc.findList(song);
+		
+		if(list.size() == 0) {
+			System.out.println("곡을 찾지 못했습니다.");
+		}else {
+			for(int i = 0; i < list.size(); i++) {
+				System.out.println((i+1)+". "+list.get(i));
+			}
+			
+			System.out.print("수정할 곡 선택 : ");
+			int select = Integer.parseInt(sc.nextLine());
+			Music music = list.get(select-1);
+			System.out.print("수정할 곡명 : ");
+			String song2 = sc.nextLine();
+			System.out.print("수정할 가수명 : ");
+			String artist = sc.nextLine();
+			System.out.println(mc.updateMusic(music, song2, artist));
+		}
 	}
 	
 	//5. 특정 곡 삭제
@@ -140,7 +160,22 @@ public class Application {
 		System.out.print("삭제할 곡명 : ");
 		String song = sc.nextLine();
 		
-		System.out.println(mc.removeMusic(song));
+		ArrayList<Music> list = new ArrayList<>();
+		list = mc.findList(song);
+		
+		if(list.size() == 0) {
+			System.out.println("곡을 찾지 못했습니다.");
+		}else {
+			for(int i = 0; i < list.size(); i++) {
+				System.out.println((i+1)+". "+list.get(i));
+			}
+			System.out.print("삭제할 곡 선택 : ");
+			int select = Integer.parseInt(sc.nextLine());
+			Music music = list.get(select-1);
+			System.out.println(mc.removeMusic(music));
+		}
+		
+		
 	}
 
 }

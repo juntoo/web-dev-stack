@@ -36,23 +36,39 @@ public class MusicController {
 	}
 	
 	//4. 특정 곡 수정
-	public String updateMusic(String song, String song2, String artist) {
+	public String updateMusic(Music music, String song2, String artist) {
 		for(Music m : list) {
-			if(m.getSong().equals(song)) {
+			if(m.equals(music)) {
+				for(Music m2 : list) {
+					if(m2.getSong().equals(song2) && m2.getArtist().equals(artist)) {
+						return "수정되는 내용이 기존 목록에 있어 불가능합니다";
+					}
+				}
+				String exSong = m.getSong();
 				String exArtist = m.getArtist();
 				m.setSong(song2);
 				m.setArtist(artist);
-				return "("+exArtist+" - "+song+")의 값이 변경되었습니다.";
+				return "("+exArtist+" - "+exSong+")의 값이 변경되었습니다.";
 			}
 		}
 		
 		return "곡을 수정하지 못했습니다.";
 	}
 	
-	//5. 특정 곡 삭제
-	public String removeMusic(String song) {
+	public ArrayList<Music> findList(String song) {
+		ArrayList<Music> songList = new ArrayList<>();
 		for(Music m : list) {
 			if(m.getSong().equals(song)) {
+				songList.add(m);
+			}
+		}
+		return songList;
+	}
+	
+	//5. 특정 곡 삭제
+	public String removeMusic(Music music) {
+		for(Music m : list) {
+			if(m.equals(music)) {
 				list.remove(m);
 				return "("+m.getArtist()+" - "+m.getSong()+")을 삭제했습니다.";
 			}
