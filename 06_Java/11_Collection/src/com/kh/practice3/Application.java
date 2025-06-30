@@ -29,6 +29,7 @@ public class Application {
 				System.out.println("4. 특정 곡 수정");
 				System.out.println("5. 특정 곡 삭제");
 				System.out.println("6. 종료");
+				System.out.println("7. 가수명 내림차순 정렬");
 				System.out.print("메뉴 번호 입력 : ");
 				switch(Integer.parseInt(sc.nextLine())) {
 					case 1:
@@ -49,6 +50,9 @@ public class Application {
 					case 6:
 						System.out.println("종료");
 						check = false;
+						break;
+					case 7:
+						descArtist();
 						break;
 					default: 
 						System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
@@ -75,7 +79,7 @@ public class Application {
 		System.out.print("가수명 : ");
 		String artist = sc.nextLine();
 		
-		System.out.println(mc.addList(song, artist));
+		System.out.println(mc.addList(new Music(artist, song)));
 	}
 	
 	//2. 전체 곡 목록 출력
@@ -83,7 +87,8 @@ public class Application {
 		/*
 		 * ****** 전체 곡 목록 출력 ******
 		 * */
-		if(mc.printAll().size() == 0) {
+		System.out.println("=======전체 곡 목록 출력=======");
+		if(mc.printAll().isEmpty()) {
 			System.out.println("목록이 비어있습니다");
 		}else {
 			for(Music music : mc.printAll()) {
@@ -130,7 +135,7 @@ public class Application {
 		ArrayList<Music> list = new ArrayList<>();
 		list = mc.findList(song);
 		
-		if(list.size() == 0) {
+		if(list.isEmpty()) {
 			System.out.println("곡을 찾지 못했습니다.");
 		}else {
 			for(int i = 0; i < list.size(); i++) {
@@ -175,7 +180,21 @@ public class Application {
 			System.out.println(mc.removeMusic(music));
 		}
 		
-		
 	}
 
+	public void descArtist() {
+		ArrayList<Music> list = mc.descArtist();
+		System.out.println("=======전체 곡 목록 출력=======");
+		for(Music music : list) {
+			System.out.println(music.getArtist()+" - "+music.getSong());
+		}
+	}
+	
+	public void ascSong() {
+		ArrayList<Music> list = mc.ascSong();
+		System.out.println("=======전체 곡 목록 출력=======");
+		for(Music music : list) {
+			System.out.println(music.getArtist()+" - "+music.getSong());
+		}
+	}
 }

@@ -51,6 +51,26 @@ public class A_Date {
 		Calendar today = Calendar.getInstance();
 		today = new GregorianCalendar();
 		System.out.println(today);
+		
+		// 년, 월, 일, 시, 분, 초
+		System.out.println("YEAR : " + today.get(Calendar.YEAR) + "년");
+		System.out.println("MONTH : " + (today.get(Calendar.MONTH)+1) + "월");
+		System.out.println("DATE : " + today.get(Calendar.DATE) + "일");
+		System.out.println("HOUR : " + today.get(Calendar.HOUR) + "시"); // 0~11
+		System.out.println("HOUR : " + today.get(Calendar.HOUR_OF_DAY) + "시"); // 0~23
+		System.out.println("MINUTE : " + today.get(Calendar.MINUTE) + "분");
+		System.out.println("SECOND : " + today.get(Calendar.SECOND) + "초");
+		
+		// 날짜 지정
+		Calendar date = Calendar.getInstance();
+		date.set(2025, Calendar.JUNE, 30);
+		System.out.println(date.getTime());
+		
+		// SimpleDateFormat 사용 가능 
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd hh:mm:ss");
+		String formatDate = sdf.format(date.getTime());
+		System.out.println(formatDate);
 	}
 	
 	public static void main(String[] args) {

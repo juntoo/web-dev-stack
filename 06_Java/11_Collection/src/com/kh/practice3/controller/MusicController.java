@@ -1,6 +1,8 @@
 package com.kh.practice3.controller;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.kh.practice3.model.Music;
 
@@ -9,8 +11,7 @@ public class MusicController {
 	private ArrayList<Music> list = new ArrayList<>();
 	
 	//1. 특정 곡 추가
-	public String addList(String song, String artist) {
-		Music music = new Music(artist, song);
+	public String addList(Music music) {
 		for(Music m : list) {
 			if(m.equals(music)) return "추가 실패";
 		}
@@ -28,7 +29,8 @@ public class MusicController {
 	public ArrayList<Music> searchMusic(String keyword) {
 		ArrayList<Music> songList = new ArrayList<>();
 		for(Music m : list) {
-			if(m.getSong().contains(keyword)||m.getArtist().contains(keyword)) {
+			if(m.getSong().toLowerCase().contains(keyword.toLowerCase())
+					||m.getArtist().toLowerCase().contains(keyword.toLowerCase())) {
 				songList.add(m);
 			}
 		}
@@ -46,8 +48,8 @@ public class MusicController {
 				}
 				String exSong = m.getSong();
 				String exArtist = m.getArtist();
-				m.setSong(song2);
-				m.setArtist(artist);
+				list.set(list.indexOf(m), new Music(artist, song2));
+				
 				return "("+exArtist+" - "+exSong+")의 값이 변경되었습니다.";
 			}
 		}
@@ -77,4 +79,18 @@ public class MusicController {
 		return "삭제할 곡이 없습니다.";
 	}
 	
+	public ArrayList<Music> descArtist(){
+		ArrayList<Music> desc = new ArrayList<>();
+		desc.addAll(list);
+		Collections.sort(desc);
+		Collections.reverse(desc);
+		return desc;
+	}
+	
+	public ArrayList<Music> ascSong(){
+		ArrayList<Music> asc = new ArrayList<>();
+		asc.addAll(list);
+//		Collections.sort(asc, );
+		return asc;
+	}
 }
