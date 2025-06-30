@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.kh.practice3.compare.SongAscending;
 import com.kh.practice3.model.Music;
 
 public class MusicController {
@@ -90,7 +91,7 @@ public class MusicController {
 	public ArrayList<Music> ascSong(){
 		ArrayList<Music> asc = new ArrayList<>();
 		asc.addAll(list);
-//		Collections.sort(asc, );
+		Collections.sort(asc, new SongAscending());
 		return asc;
 	}
 }
