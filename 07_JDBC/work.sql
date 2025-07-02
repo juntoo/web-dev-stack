@@ -1,0 +1,14 @@
+CREATE TABLE member(
+	id VARCHAR(100) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE bank(
+	name VARCHAR(100),
+    balance INT
+);
+INSERT INTO bank VALUES('지은', 100000);
+INSERT INTO bank VALUES('지연', 0);
+
+SELECT * FROM bank;
