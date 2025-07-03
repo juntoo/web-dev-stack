@@ -73,6 +73,9 @@ public class MemberDAO {
 		if(rs.next()) {
 			member = new Member(rs.getString("id"), rs.getString("name"), rs.getString("pwd"), rs.getInt("age"));
 		}
+		
+		close(rs, ps, connect);		
+		
 		return member;
 	}
 	
@@ -85,5 +88,19 @@ public class MemberDAO {
 		ps.setString(1, id);
 		
 		ps.executeUpdate();
+		
+		close(ps, connect);
+	}
+	
+	public void deleteRent(String id) throws SQLException {
+		Connection connect = getConnect();
+		
+		String query = "DELETE FROM rent WHERE id = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
+		ps.setString(1, id);
+		
+		ps.executeUpdate();
+		
+		close(ps, connect);
 	}
 }

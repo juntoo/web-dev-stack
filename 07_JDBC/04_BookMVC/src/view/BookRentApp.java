@@ -21,18 +21,61 @@ public class BookRentApp {
 	
 	public static void main(String[] args) {
 		BookRentApp app = new BookRentApp();
+		app.member = null;
 		
-		app.menu();
+		while(true) {
+			if (app.member == null) {
+				app.loginMenu();
+			}
+
+			if (app.member != null && !app.member.getId().equals("admin")) {
+				app.mainMenu();
+			}
+
+			if (app.member != null && app.member.getId().equals("admin")) {
+				app.adminMenu();
+			}
+		}
+		
 	}
 	
-	public void menu() {
+	public void loginMenu() {
+		try {
+			while(true) {
+				System.out.println("1. 회원가입");
+				System.out.println("2. 로그인");
+				System.out.println("3. 전체 책 조회");
+				
+				System.out.print("메뉴 선택 > ");
+				int select = Integer.parseInt(sc.nextLine());
+				
+				switch(select) {
+					case 1: 
+						register();
+						break;
+					case 2:
+						login();
+						break;
+					case 3:
+						printBookAll();
+						break;
+				}
+				
+				if(this.member != null) return;
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("숫자를 입력해주세요");
+		}
+		
+	}
+	
+	public void mainMenu() {
 		while(true) {
-			System.out.println("1. 전체 책 조회");
-			System.out.println("2. 책 등록");
-			System.out.println("3. 책 삭제");
-			System.out.println("4. 회원가입");
-			System.out.println("5. 로그인");
-			System.out.println("1. 전체 책 조회");
+			System.out.println("1. 책 대여");
+			System.out.println("2. 대여한 책 조회");
+			System.out.println("3. 대여 취소");
+			System.out.println("4. 회원탈퇴");
+			System.out.println("5. 로그아웃");
 			
 			System.out.print("메뉴 선택 > ");
 			int select = Integer.parseInt(sc.nextLine());
@@ -44,12 +87,39 @@ public class BookRentApp {
 				case 2:
 					registerBook();
 					break;
-				case 4: 
+				case 3: 
 					register();
 					break;
+				case 4:
+					registerDelete();
+					this.member = null;
+					return;
 				case 5:
-					login();
+					this.member = null;
+					return;
+			}
+		}
+	}
+	
+	public void adminMenu() {
+		while(true) {
+			System.out.println("1. 책 등록");
+			System.out.println("2. 책 삭제");
+			System.out.println("3. 로그아웃");
+			
+			System.out.print("메뉴 선택 > ");
+			int select = Integer.parseInt(sc.nextLine());
+			
+			switch(select) {
+				case 1: 
+					registerBook();
 					break;
+				case 2:
+					sellBook();
+					break;
+				case 3:
+					this.member = null;
+					return;
 			}
 		}
 	}
@@ -63,26 +133,6 @@ public class BookRentApp {
 				}
 			}else System.out.println("도서 목록이 없습니다");
 		}
-	}
-	
-	public void registerBook() {
-		try {
-			System.out.print("등록한 책 제목 : ");
-			String title = sc.nextLine();
-			
-			System.out.print("저자 : ");
-			String author = sc.nextLine();
-			
-			System.out.print("연령제한 : ");
-			int accessAge = Integer.parseInt(sc.nextLine());
-			
-			boolean check = bc.registerBook(title, author, accessAge);
-			if(check) System.out.println("성공적으로 등록되었습니다");
-			else System.out.println("등록에 실패했습니다");
-		} catch (NumberFormatException e) {
-			System.out.println("연령제한에는 숫자만 입력해주세요");
-		}
-		
 	}
 	
 	public void register() {
@@ -116,5 +166,55 @@ public class BookRentApp {
 		}else {
 			System.out.println("환영합니다. " + member.getName() + "님");
 		}
+		
+		this.member = member;
+	}
+	
+	public void registerBook() {
+		try {
+			System.out.print("등록한 책 제목 : ");
+			String title = sc.nextLine();
+			
+			System.out.print("저자 : ");
+			String author = sc.nextLine();
+			
+			System.out.print("연령제한 : ");
+			int accessAge = Integer.parseInt(sc.nextLine());
+			
+			boolean check = bc.registerBook(title, author, accessAge);
+			if(check) System.out.println("성공적으로 등록되었습니다");
+			else System.out.println("등록에 실패했습니다");
+		} catch (NumberFormatException e) {
+			System.out.println("연령제한에는 숫자만 입력해주세요");
+		}
+		
+	}
+	
+	public void sellBook() {
+		System.out.print("삭제할 책의 번호 : ");
+		int bookNo = Integer.parseInt(sc.nextLine());
+		
+		if(bc.sellBook(bookNo)) {
+			System.out.println("book no."+bookNo+"가 삭제 되었습니다");
+		}else System.out.println("삭제에 실패했습니다. 대여 여부를 확인해주세요");
+	}
+	
+
+	public void registerDelete() {
+		System.out.print("정말 탈퇴하시겠습니까? y / n > ");
+		char select  = sc.nextLine().charAt(0);
+		
+		if(select == 'y') {
+			mc.delete(member.getId());
+			System.out.println("그동안 감사했습니다");
+		}
+	}
+	
+	public void printRentBook() {
+		
+	}
+	
+	public void deleteRent() {
+		
 	}
 }

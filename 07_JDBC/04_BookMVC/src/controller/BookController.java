@@ -30,7 +30,7 @@ public class BookController {
 				return true;
 			}
 		} catch (SQLException e) {
-//			System.out.println("관리자에게 문의하세요");
+			System.out.println("관리자에게 문의하세요");
 			return false;
 		}
 		
@@ -40,7 +40,15 @@ public class BookController {
 	// 3. 책 삭제
 	public boolean sellBook(int bookNo) {
 		// 빌리고 있는 책을 삭제 못하게
-		
+		try {
+			boolean check = dao.checkRent(bookNo);
+			if(!check) {
+				dao.sellBook(bookNo);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		return false;
 	}

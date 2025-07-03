@@ -32,6 +32,11 @@ public class MemberController {
 	// 6. 회원탈퇴
 	public void delete(String id) {
 		// 회원탈퇴시 대여중인 책 모두 기록 삭제
-		
+		try {
+			dao.delete(id);
+			dao.deleteRent(id);
+		} catch (Exception e) {
+			System.out.println("탈퇴 중 문제가 발생했습니다");
+		}
 	}
 }

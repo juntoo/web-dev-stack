@@ -66,7 +66,7 @@ public class BookDAO {
 	public void registerBook(String title, String author, int accessAge) throws SQLException {
 		Connection connect = getConnect();
 		
-		String query = "INSERT ITO book(title, author, access_age) VALUES(?, ?, ?)";
+		String query = "INSERT INTO book(title, author, access_age) VALUES(?, ?, ?)";
 		PreparedStatement ps = connect.prepareStatement(query);
 		ps.setString(1, title);
 		ps.setString(2, author);
@@ -94,13 +94,18 @@ public class BookDAO {
 	public boolean checkBook(String title, String author, int accessAge) throws SQLException {
 		Connection connect = getConnect();
 		
-		String query = "SELECT * FROM book";
+		String query = "SELECT * FROM book WHERE title = ? AND author = ? AND access_age = ?";
 		PreparedStatement ps = connect.prepareStatement(query);
+		ps.setString(1, title);
+		ps.setString(2, author);
+		ps.setInt(3, accessAge);
 		ResultSet rs = ps.executeQuery();
+		
+		boolean check = rs.next();
 		
 		close(rs, ps, connect);
 		
-		return rs.next();
+		return check;
 	}
 	
 	public boolean checkRent(int bookNo) throws SQLException {
@@ -111,8 +116,10 @@ public class BookDAO {
 		ps.setInt(1, bookNo);
 		ResultSet rs = ps.executeQuery();
 		
+		boolean check = rs.next();
+		
 		close(rs, ps, connect);
 		
-		return rs.next();
+		return check;
 	}
 }
