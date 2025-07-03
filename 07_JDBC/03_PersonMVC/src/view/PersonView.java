@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.PersonController;
-import model.Person;
+import model.vo.Person;
 
 public class PersonView {
 	
@@ -14,79 +14,136 @@ public class PersonView {
 	
 	public static void main(String[] args) {
 		PersonView pv = new PersonView();
-		try {
-			// 테스트 용도
-//			pv.addPerson();
-			
-//			pv.searchAllPerson();
-			
-//			pv.searchPerson();
-			
-//			pv.updatePerson();
-			
-//			pv.removePerson();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		pv.menu();
 
 		
 	}
 	
-	public void addPerson() throws SQLException {
-		System.out.print("이름 : ");
-		String name = sc.nextLine();
-		
-		System.out.print("나이 : ");
-		int age = Integer.parseInt(sc.nextLine());
-		
-		System.out.print("주소 : ");
-		String addr = sc.nextLine();
-		
-		if(pc.addPerson(name, age, addr) > 0) System.out.println("추가성공");
-		else System.out.println("추가실패");
+	public void menu() {
+		while(true) {
+			System.out.println("1. 추가");
+			System.out.println("2. 전체 조회");
+			System.out.println("3. 선택 조회");
+			System.out.println("4. 회원 정보 변경");
+			System.out.println("5. 회원 삭제");
+			System.out.print("선택 > ");
+			int select = Integer.parseInt(sc.nextLine());
+			switch (select) {
+				case 1:
+					System.out.println(addPerson());
+					break;
+				case 2:
+					searchAllPerson();
+					break;
+				case 3:
+					searchPerson();
+					break;
+				case 4:
+					System.out.println(updatePerson());
+					break;
+				case 5:
+					System.out.println(removePerson());
+					break;
+			}
+		}
 	}
 	
-	public void searchAllPerson() throws SQLException {
+//	public void addPerson() throws SQLException {
+//		System.out.print("이름 : ");
+//		String name = sc.nextLine();
+//		
+//		System.out.print("나이 : ");
+//		int age = Integer.parseInt(sc.nextLine());
+//		
+//		System.out.print("주소 : ");
+//		String addr = sc.nextLine();
+//		
+//		if(pc.addPerson(name, age, addr) > 0) System.out.println("추가성공");
+//		else System.out.println("추가실패");
+//	}
+	
+	public String addPerson() {
+		try {
+			System.out.print("이름 : ");
+			String name = sc.nextLine();
+			
+			System.out.print("나이 : ");
+			int age = Integer.parseInt(sc.nextLine());
+			
+			System.out.print("주소 : ");
+			String addr = sc.nextLine();
+			
+			return pc.addPerson(name, age, addr);
+		} catch (NumberFormatException e) {
+			return "숫자를 입력해주세요";
+		}
+	}
+	
+	public void searchAllPerson() {
 		ArrayList<Person> list = pc.searchAllPerson();
-		if(list.size() > 0) {
+		if(list!=null) {
 			for(Person p : list) {
 				System.out.println(p);
 			}
-		}else System.out.println("테이블에 사람이 없습니다");
+		}else System.out.println("현재 가입된 인원이 없습니다");
+		
 	}
 	
-	public void searchPerson() throws SQLException {
+	public void searchPerson() {
+		searchAllPerson();
 		System.out.print("조회할 ID : ");
 		int id = Integer.parseInt(sc.nextLine());
 		
 		Person person = pc.searchPerson(id);
-		if(person != null) {
-			System.out.println(person);
-		}else System.out.println("해당하는 인원이 없습니다");
+		if(person != null) System.out.println(person);
+		else System.out.println("해당하는 인원이 없습니다");
 	}
 	
-	public void updatePerson() throws SQLException {
-		System.out.print("변경할 사람 ID : ");
-		int id = Integer.parseInt(sc.nextLine());
+	public String updatePerson() {
+		try {
+			System.out.print("변경할 사람 ID : ");
+			int id = Integer.parseInt(sc.nextLine());
+			
+			Person person = pc.searchPerson(id);
+			if(person != null) System.out.println(person);
+			else {
+				return "조횐된 아이디가 없습니다";
+			}
+			
+			System.out.print("변경할 이름 : ");
+			String name = sc.nextLine();
+			
+			System.out.print("변경할 나이 : ");
+			int age = Integer.parseInt(sc.nextLine());
+			
+			System.out.print("변경할 주소 : ");
+			String addr = sc.nextLine();
+			
+			return pc.updatePerson(id, name, age, addr);
+		} catch (NumberFormatException e) {
+			return "숫자를 입력해주세요";
+		} catch (Exception e) {
+			return "수정 실패했습니다";
+		}
 		
-		System.out.print("변경할 이름 : ");
-		String name = sc.nextLine();
-		
-		System.out.print("변경할 나이 : ");
-		int age = Integer.parseInt(sc.nextLine());
-		
-		System.out.print("변경할 주소 : ");
-		String addr = sc.nextLine();
-		
-		System.out.println(pc.updatePerson(id, name, age, addr) + "명 수정 완료");
 	}
 	
-	public void removePerson() throws SQLException {
-		System.out.print("삭제할 사람 ID : ");
-		int id = Integer.parseInt(sc.nextLine());
+	public String removePerson() {
 		
-		int num = pc.removePerson(id);
-		if(num > 0) System.out.println(num + "명 삭제 완료");
-		else System.out.println("삭제 실패");
+		try {
+			System.out.print("삭제할 사람 ID : ");
+			int id = Integer.parseInt(sc.nextLine());
+			
+			Person person = pc.searchPerson(id);
+			if(person != null) System.out.println(person);
+			else {
+				return "조횐된 아이디가 없습니다";
+			}
+			
+			return pc.removePerson(id);
+		} catch (NumberFormatException e) {
+			return "숫자를 입력해주세요";
+		}
 	}
 }
