@@ -32,18 +32,20 @@ WHERE id = 1;
 
 DELETE FROM person WHERE id = 1;
 
-CREATE TABLE client(
-	id VARCHAR(100) PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    pwd VARCHAR(100) NOT NULL,
-    age INT NOT NULL
-);
+
 
 CREATE TABLE book(
 	book_no INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
     author VARCHAR(50) NOT NULL,
-    access_age INT NOT NULL
+    access_age INT DEFAULT 0
+);
+
+CREATE TABLE member(
+	id VARCHAR(100) PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    pwd VARCHAR(200) NOT NULL,
+    age INT NOT NULL
 );
 
 CREATE TABLE rent(
@@ -56,4 +58,8 @@ CREATE TABLE rent(
 ALTER TABLE rent ADD
 FOREIGN KEY (book_no) REFERENCES book(book_no);
 ALTER TABLE rent ADD
-FOREIGN KEY (id) REFERENCES client(id);
+FOREIGN KEY (id) REFERENCES member(id);
+
+SELECT * FROM member;
+
+DROP TABLE member;
