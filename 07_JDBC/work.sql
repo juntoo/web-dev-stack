@@ -62,4 +62,14 @@ FOREIGN KEY (id) REFERENCES member(id);
 
 SELECT * FROM member;
 
-DROP TABLE member;
+SELECT * FROM book;
+
+SELECT * FROM rent;
+
+SELECT book_no, title, author, access_age
+FROM book
+JOIN rent USING(book_no)
+JOIN member USING(id)
+WHERE id = 'asdf';
+
+DROP TABLE book;
