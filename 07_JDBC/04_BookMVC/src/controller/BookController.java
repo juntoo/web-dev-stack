@@ -24,33 +24,32 @@ public class BookController {
 		// 기존 제목, 저자, 제한, 나이까지 동일한 책이 있으면 안되게
 		
 		try {
-			boolean check = dao.checkBook(title, author, accessAge);
-			if(!check) {
-				dao.registerBook(title, author, accessAge);
-				return true;
+			if(dao.checkBook(title, author, accessAge)) {
+				return false;
 			}
+			dao.registerBook(title, author, accessAge);
+			return true;
 		} catch (SQLException e) {
 			System.out.println("관리자에게 문의하세요");
 			return false;
 		}
-		
-		return false;
 	}
 	
 	// 3. 책 삭제
-	public boolean sellBook(int bookNo) {
+	public String sellBook(String title) {
 		// 빌리고 있는 책을 삭제 못하게
 		try {
+			int bookNo = dao.serchBook(title);
 			boolean check = dao.checkRent(bookNo);
 			if(!check) {
-				dao.sellBook(bookNo);
-				return true;
-			}
+				if(dao.sellBook(bookNo)==1)	return "삭제완료";
+				else return "해당하는 책이 없습니다";
+			} return "해당 책은 대여 중이라 삭제가 불가능합니다";
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		
-		return false;
 	}
 	
 	

@@ -12,31 +12,31 @@ public class MemberController {
 		// id가 primary key 에러가 남. 그거 활용
 		try {
 			dao.register(member);
-			return "회원 가입 성공";
+			return member.getName()+"님. 회원 가입을 환영합니다!";
 		} catch (Exception e) {
-			return "아이디가 중복됩니다.";
+			return "중복된 아이디 입니다.";
 		}
 	}
 	
 	// 5. 로그인
 	public Member login(String id, String pwd) {
-		Member member = null;
 		try {
-			member = dao.login(id, pwd);
+			return dao.login(id, pwd);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return member;
+		return null;
 	}
 	
 	// 6. 회원탈퇴
 	public void delete(String id) {
 		// 회원탈퇴시 대여중인 책 모두 기록 삭제
 		try {
-			dao.delete(id);
 			dao.deleteRent(id);
+			dao.delete(id);
 		} catch (Exception e) {
-			System.out.println("탈퇴 중 문제가 발생했습니다");
+			e.printStackTrace();
+			System.out.println("탈퇴 중 문제가 발생했습니다. 관리자에게 문의해주세요");
 		}
 	}
 }

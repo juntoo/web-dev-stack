@@ -15,4 +15,5 @@ public class Rent {
 	
 	private Member member;
 	private Book book;
+	
 }

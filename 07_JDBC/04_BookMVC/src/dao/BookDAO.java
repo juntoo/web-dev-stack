@@ -78,16 +78,47 @@ public class BookDAO {
 	}
 	
 	// 3. 책 삭제
-	public void sellBook(int bookNo) throws SQLException {
+//	public int sellBook(int bookNo) throws SQLException {
+//		Connection connect = getConnect();
+//		
+//		String query = "DELETE FROM book WHERE book_no = ?";
+//		PreparedStatement ps = connect.prepareStatement(query);
+//		ps.setInt(1, bookNo);
+//		
+//		int check = ps.executeUpdate();
+//		
+//		close(ps, connect);
+//		
+//		return check;
+//	}
+	public int sellBook(int bookNo) throws SQLException {
 		Connection connect = getConnect();
 		
 		String query = "DELETE FROM book WHERE book_no = ?";
 		PreparedStatement ps = connect.prepareStatement(query);
 		ps.setInt(1, bookNo);
 		
-		ps.executeUpdate();
+		int check = ps.executeUpdate();
 		
 		close(ps, connect);
+		
+		return check;
+	}
+	
+	// 제목으로 책 조회
+	public int serchBook(String title) throws SQLException {
+		Connection connect = getConnect();
+		
+		String query = "SELECT * FROM book WHERE title = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
+		ps.setString(1, title);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next()) {
+			return rs.getInt("book_no");
+		}
+		
+		return -1;
 	}
 	
 	// 책 중복 체크용. true = 전체 목록에 있음

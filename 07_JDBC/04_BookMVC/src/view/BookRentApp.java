@@ -8,12 +8,13 @@ import controller.MemberController;
 import controller.RentController;
 import vo.Book;
 import vo.Member;
+import vo.Rent;
 
 public class BookRentApp {
 	
 	private Scanner sc = new Scanner(System.in);
 	
-	private Member member = new Member();
+	private Member member = null;
 	
 	private BookController bc = new BookController();
 	private MemberController mc = new MemberController();
@@ -21,22 +22,22 @@ public class BookRentApp {
 	
 	public static void main(String[] args) {
 		BookRentApp app = new BookRentApp();
-		app.member = null;
 		
+		app.menu();
+		
+		
+	}
+	
+	public void menu() {
 		while(true) {
-			if (app.member == null) {
-				app.loginMenu();
-			}
-
-			if (app.member != null && !app.member.getId().equals("admin")) {
-				app.mainMenu();
-			}
-
-			if (app.member != null && app.member.getId().equals("admin")) {
-				app.adminMenu();
+			if (member == null) {
+				loginMenu();
+			} else if (member.getId().equals("admin") && member.getPwd().equals("1234")) {
+				adminMenu();
+			}else {
+				mainMenu();
 			}
 		}
-		
 	}
 	
 	public void loginMenu() {
@@ -82,13 +83,13 @@ public class BookRentApp {
 			
 			switch(select) {
 				case 1: 
-					printBookAll();
+					rentBook();
 					break;
 				case 2:
-					registerBook();
+					printRentBook();
 					break;
 				case 3: 
-					register();
+					deleteRent();
 					break;
 				case 4:
 					registerDelete();
@@ -159,20 +160,18 @@ public class BookRentApp {
 		System.out.print("패스워드 : ");
 		String pwd = sc.nextLine();
 		
-		Member member = mc.login(id, pwd);
+		this.member = mc.login(id, pwd);
 		
 		if(member==null) {
 			System.out.println("아이디나 비밀번호를 확인해주세요");
 		}else {
 			System.out.println("환영합니다. " + member.getName() + "님");
 		}
-		
-		this.member = member;
 	}
 	
 	public void registerBook() {
 		try {
-			System.out.print("등록한 책 제목 : ");
+			System.out.print("등록할 책 제목 : ");
 			String title = sc.nextLine();
 			
 			System.out.print("저자 : ");
@@ -190,15 +189,20 @@ public class BookRentApp {
 		
 	}
 	
+//	public void sellBook() {
+//		printBookAll();
+//		System.out.print("삭제할 책의 번호 : ");
+//		int bookNo = Integer.parseInt(sc.nextLine());
+//		
+//		System.out.println(bc.sellBook(bookNo));
+//	}
 	public void sellBook() {
-		System.out.print("삭제할 책의 번호 : ");
-		int bookNo = Integer.parseInt(sc.nextLine());
+		printBookAll();
+		System.out.print("삭제할 책 제목 : ");
+		String title = sc.nextLine();
 		
-		if(bc.sellBook(bookNo)) {
-			System.out.println("book no."+bookNo+"가 삭제 되었습니다");
-		}else System.out.println("삭제에 실패했습니다. 대여 여부를 확인해주세요");
+		System.out.println(bc.sellBook(title));
 	}
-	
 
 	public void registerDelete() {
 		System.out.print("정말 탈퇴하시겠습니까? y / n > ");
@@ -206,15 +210,41 @@ public class BookRentApp {
 		
 		if(select == 'y') {
 			mc.delete(member.getId());
-			System.out.println("그동안 감사했습니다");
+			System.out.println("그동안 감사했습니다. 안녕히 가세요");
 		}
 	}
 	
-	public void printRentBook() {
+//	public void rentBook() {
+//		printBookAll();
+//		System.out.print("대여할 책의 번호 : ");
+//		int bookNo = Integer.parseInt(sc.nextLine());
+//		
+//		System.out.println(rc.rentBook(this.member.getId(), bookNo));
+//	}
+	public void rentBook() {
+		printBookAll();
+		System.out.print("대여할 책의 제목 : ");
+		String title = sc.nextLine();
 		
+		System.out.println(rc.rentBook(this.member.getId(), title));
+	}
+	
+	public void printRentBook() {
+		ArrayList<Rent> list = rc.printRentBook(this.member.getId());
+		if(list!=null) {
+			if(list.size() > 0) {
+				for(Rent r : list) {
+					System.out.println("대여번호 : "+r.getRentNo() + ", 책 : " + r.getBook()+", 대여일 : "+r.getRentDate());
+				}
+			}else System.out.println("대여 내역이 없습니다");
+		}
 	}
 	
 	public void deleteRent() {
+		printRentBook();
+		System.out.print("반납할 책의 대여번호를 입력하세요 : ");
+		int rentNo = Integer.parseInt(sc.nextLine());
 		
+		System.out.println(rc.deleteRent(rentNo));
 	}
 }
