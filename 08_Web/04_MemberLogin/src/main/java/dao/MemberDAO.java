@@ -43,21 +43,6 @@ public class MemberDAO {
 		close(ps, connect);
 	}
 	
-//	public void register(String id, String name, String pwd, int age) throws SQLException {
-//		Connection connect = getConnect();
-//		
-//		String query = "INSERT INTO member VALUES(?, ?, ?, ?)";
-//		PreparedStatement ps = connect.prepareStatement(query);
-//		ps.setString(1, id);
-//		ps.setString(2, name);
-//		ps.setString(3, pwd);
-//		ps.setInt(4, age);
-//		
-//		ps.executeUpdate();
-//		
-//		close(ps, connect);
-//	}
-	
 	public void register(Member member) throws SQLException {
 		Connection connect = getConnect();
 		
@@ -71,6 +56,23 @@ public class MemberDAO {
 		ps.executeUpdate();
 		
 		close(ps, connect);
+	}
+	
+	public Member login(String id, String pwd) throws SQLException {
+		Connection connect = getConnect();
+		
+		String query = "SELECT * FROM member WHERE id = ? AND pwd = ?";
+		PreparedStatement ps = connect.prepareStatement(query);
+		ps.setString(1, id);
+		ps.setString(2, pwd);
+		
+		ResultSet rs = ps.executeQuery();
+		Member member = null;
+		if(rs.next()) {
+			member = new Member(rs.getString("id"), rs.getString("name"), rs.getString("pwd"), rs.getInt("age"));
+		}
+		
+		return member;
 	}
 	
 	public ArrayList<Member> viewAll() throws SQLException {
