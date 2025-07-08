@@ -61,7 +61,7 @@ ALTER TABLE rent ADD
 FOREIGN KEY (id) REFERENCES member(id);
 
 SELECT * FROM member;
-
+DELETE FROM member WHERE id = 'admin';
 SELECT * FROM book;
 
 SELECT * FROM rent;
@@ -72,4 +72,4 @@ JOIN rent USING(book_no)
 JOIN member USING(id)
 WHERE id = 'asdf';
 
-DROP TABLE book;
+DELETE FROM member WHERE id = 'admin';
