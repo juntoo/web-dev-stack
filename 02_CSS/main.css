@@ -1,0 +1,13 @@
+body {
+  background-color: antiquewhite;
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+#login {
+  background-color: white;
+  width: 600px;
+  height: 400px;
+}
