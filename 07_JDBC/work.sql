@@ -64,7 +64,7 @@ SELECT * FROM member;
 DELETE FROM member WHERE id = 'admin';
 SELECT * FROM book;
 
-SELECT * FROM rent;
+SELECT * FROM member;
 
 SELECT book_no, title, author, access_age
 FROM book
