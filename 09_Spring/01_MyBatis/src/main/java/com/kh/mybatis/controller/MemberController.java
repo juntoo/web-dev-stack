@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.kh.mybatis.model.dto.SearchDTO;
 import com.kh.mybatis.model.vo.Member;
 import com.kh.mybatis.service.MemberService;
 
@@ -58,13 +59,36 @@ public class MemberController {
 //		Member member = new Member(user.getId(), vo.getPwd(), vo.getName(), vo.getAge());
 //		service.update(member);
 //		session.setAttribute("member", member);
+//		if(vo.getName()==null) vo.setName(user.getName());
+//		if(vo.getAge()==0) vo.setAge(user.getAge());
 		vo.setId(user.getId());
 		
 		service.update(vo);
-
-		session.setAttribute("member", vo);
+		
+		Member result = service.login(vo);
+		
+		session.setAttribute("member", result);
 		
 		return "redirect:/";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		
+		service.delete(member.getId());
+		
+		if(session!=null) session.invalidate();
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/search")
+	public String search(SearchDTO dto, Model model) {
+		System.out.println(dto);
+		model.addAttribute("list", service.search(dto));
+		return "index";
 	}
 	
 	@GetMapping("/logout")
