@@ -72,4 +72,10 @@ JOIN rent USING(book_no)
 JOIN member USING(id)
 WHERE id = 'asdf';
 
+DROP TABLE rent;
+
+SELECT EXISTS(SELECT * FROM member WHERE id='admin');
+
 DELETE FROM member WHERE id = 'admin';
+
+SELECT * FROM user_info;

@@ -44,12 +44,14 @@
 		<input type="submit" value="검색">
 	</form>
 	<!-- 회원 전체 목록 -->
-	<table border = "1">
+	<form action="delete" method="post">
+	<table border = "1" style="text-align: center;">
 		<tr>
 			<th>아이디</th>
 			<th>비밀번호</th>
 			<th>이름</th>
 			<th>나이</th>
+			<th>삭제</th>
 		</tr>
 		
 		<c:forEach items="${list}" var="m">	
@@ -58,8 +60,11 @@
 			<td>${m.pwd}</td>
 			<td>${m.name}</td>
 			<td>${m.age}</td>
+			<td><input type="checkbox" name="idList" value="${m.id}"/></td>
 		</tr>
 		</c:forEach>
 	</table>
+	<input type="submit" value="삭제">
+	</form>
   </body>
 </html>

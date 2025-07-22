@@ -1,10 +1,13 @@
 package com.kh.mybatis.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.mybatis.model.dto.SearchDTO;
 import com.kh.mybatis.model.vo.Member;
@@ -86,9 +89,22 @@ public class MemberController {
 	
 	@GetMapping("/search")
 	public String search(SearchDTO dto, Model model) {
-		System.out.println(dto);
 		model.addAttribute("list", service.search(dto));
 		return "index";
+	}
+	
+	@PostMapping("/delete")
+	public String delete(@RequestParam(name="idList", required = false) List<String> idList, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		
+		if(idList!=null) service.selectDelete(idList);
+		
+		for(String id : idList) {
+			if(member!=null&&id.equals(member.getId())) session.invalidate();
+		}
+		
+		return "redirect:/";
 	}
 	
 	@GetMapping("/logout")
