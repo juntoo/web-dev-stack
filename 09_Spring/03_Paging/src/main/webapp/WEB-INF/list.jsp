@@ -38,7 +38,7 @@
 					</tr>
 				</c:forEach>
 			</tbody>
-		</table>
+		</table>  
 		<nav>
 			<ul class="pagination">
 				<li class="page-item ${paging.prev ? '' : 'disabled'}">

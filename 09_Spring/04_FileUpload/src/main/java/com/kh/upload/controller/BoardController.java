@@ -2,7 +2,6 @@ package com.kh.upload.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,15 +11,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.upload.model.dto.BoardDTO;
+import com.kh.upload.model.dto.PagingDTO;
 import com.kh.upload.model.vo.Board;
 import com.kh.upload.service.BoardService;
 
 @Controller
 public class BoardController {
+	
+	private String path = "\\\\192.168.0.35\\upload\\";
 	
 	@Autowired
 	private BoardService boardService;
@@ -34,13 +35,20 @@ public class BoardController {
 		UUID uuid = UUID.randomUUID();
 		String fileName = uuid.toString() + "_" + file.getOriginalFilename();
 //		System.out.println(fileName);
-		File copyFile = new File("\\\\192.168.0.35\\upload\\"+fileName);
+		File copyFile = new File(path+fileName);
 		try {
 			file.transferTo(copyFile);
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
 		return fileName;
+	}
+	
+	public void fileDelete(String url) {
+		File file = new File(path+url);
+		if(file.exists()) {
+			file.delete();
+		}
 	}
 	
 	@PostMapping("/upload")
@@ -74,19 +82,26 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model) {
-		List<BoardDTO> list = boardService.selectAll();
+	public String list(Model model, PagingDTO paging) {
+//		System.out.println(paging.getKeyword());
+//		paging.setKeyword(keyword);
+		String keyword = paging.getKeyword();
+		List<BoardDTO> list = boardService.selectAll(paging);
 		model.addAttribute("list", list);
+		model.addAttribute("paging", new PagingDTO(paging.getPage(), boardService.total(keyword)));
+//		model.addAttribute("keyword", keyword);
 		return "list";
 	}
 	
 	@PostMapping("/write")
 	public String write(BoardDTO dto) {
 		Board board = new Board();
-		String url = fileUpload(dto.getFile());
+		if(!dto.getFile().isEmpty()) {
+			String url = fileUpload(dto.getFile());
+			board.setUrl(url);
+		}
 		board.setTitle(dto.getTitle());
 		board.setContent(dto.getContent());
-		board.setUrl(url);
 		boardService.insert(board);
 		return "redirect:/view?no="+board.getNo();
 	}
@@ -106,20 +121,21 @@ public class BoardController {
 		board.setTitle(dto.getTitle());
 		board.setContent(dto.getContent());
 		if(!dto.getFile().isEmpty()) {
+			fileDelete(dto.getUrl());
 			String url = fileUpload(dto.getFile());
 			board.setUrl(url);
 		} else {
-			String url2 = boardService.select(dto.getNo()).getUrl();
-			board.setUrl(url2);
+			board.setUrl(dto.getUrl());
 		}
 		
-		System.out.println(board);
 		boardService.update(board);
 		return "redirect:/view?no="+dto.getNo();
 	}
 	
 	@GetMapping("/delete")
 	public String delete(int no) {
+		BoardDTO board = boardService.select(no);
+		fileDelete(board.getUrl());
 		boardService.delete(no);
 		return "redirect:/list";
 	}

@@ -19,19 +19,23 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
     <div class="container">
       <h1>View Page</h1>
       <p>제목 : ${board.title}</p>
       <p>내용 : ${board.content}</p>
-      <img src="http://192.168.0.35:8081/${board.url}" height="300px"><br />
-      <p
-        >작성시간 :
+      <c:if test='${not empty board.url and board.url != ""}'>
+      	<img src="http://192.168.0.35:8081/${board.url}" height="300px" /><br />
+      </c:if>
+      <p>
+        작성시간 :
         <fmt:formatDate
           value="${board.createdAt}"
           pattern="yyyy-MM-dd HH:mm:ss"
-      /></p>
+        />
+      </p>
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -40,7 +44,13 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
       >
         수정
       </button>
-      <button type="button" class="btn btn-outline-dark" onclick="location.href='/delete?no=${board.no}'">삭제</button>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        onclick="location.href='/delete?no=${board.no}'"
+      >
+        삭제
+      </button>
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -70,7 +80,8 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
             ></button>
           </div>
           <form action="/edit" method="post" enctype="multipart/form-data">
-            <input name="no" value="${board.no}" hidden />
+            <input name="no" value="${board.no}" type="hidden" />
+            <input name="url" value="${board.url}" type="hidden" />
             <div class="modal-body">
               <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label"
@@ -87,9 +98,9 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
                 <label for="exampleFormControlTextarea1" class="form-label"
                   >Content</label
                 >
-                <textarea class="form-control" rows="3" name="content"
-                >${board.content}
-                </textarea>
+                <textarea class="form-control" rows="3" name="content">
+${board.content}</textarea
+                >
               </div>
               <div class="mb-3">
                 <label for="formFile" class="form-label">Add File</label>
@@ -109,7 +120,9 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
               >
                 Close
               </button>
-              <button type="submit" class="btn btn-primary">Edit</button>
+              <button type="submit" id="edit-btn" class="btn btn-primary">
+                Edit
+              </button>
             </div>
           </form>
         </div>
@@ -171,4 +184,5 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
       </div>
     </div>
   </body>
+  <script></script>
 </html>

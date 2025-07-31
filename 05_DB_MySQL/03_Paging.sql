@@ -11,5 +11,12 @@ CREATE TABLE board (
     url VARCHAR(100),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
+drop table board;
 select * from board;
+
+CREATE TABLE user(
+	id VARCHAR(50) PRIMARY KEY,
+   pwd VARCHAR(100),
+   name VARCHAR(100),
+   role VARCHAR(20) DEFAULT 'ROLE_USER'
+);

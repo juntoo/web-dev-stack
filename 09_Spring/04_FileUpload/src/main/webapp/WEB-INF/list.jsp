@@ -49,6 +49,36 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
           </c:forEach>
         </tbody>
       </table>
+      <nav>
+        <ul class="pagination">
+          <li class="page-item ${paging.prev ? '' : 'disabled'}">
+            <a class="page-link" href="/list?keyword=${param.keyword}&page=${paging.startPage - 1}"
+              >Previous</a
+            >
+          </li>
+
+          <c:forEach
+            begin="${paging.startPage}"
+            end="${paging.endPage}"
+            var="page"
+          >
+            <li class="page-item">
+              <a
+                class="page-link ${paging.page == page ? 'active' : ''}"
+                href="/list?keyword=${param.keyword}&page=${page}"
+                >${page}</a
+              >
+            </li>
+          </c:forEach>
+
+          <li class="page-item ${paging.next ? '' : 'disabled'}">
+            <a class="page-link" href="/list?keyword=${param.keyword}&page=${paging.endPage + 1}"
+              >Next</a
+            >
+          </li>
+        </ul>
+      </nav>
+
       <button
         type="button"
         class="btn btn-outline-dark"
@@ -57,6 +87,22 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
       >
         글 추가
       </button>
+
+      <br /> <!--  <a>제목 검색</a>
+      <input type="text" name="keyword" value="${param.keyword}" id="keyword" />
+      <button
+        type="button"
+        name="search"
+        onclick="search()"
+        class="btn btn-outline-dark"
+      >
+        검색
+      </button>  -->
+      <form action="/list">
+      	<a>제목 검색</a>
+      	<input type="text" name="keyword" value="${param.keyword}"/>
+      	<input type="submit" value="검색" class="btn btn-outline-dark"/>
+      </form>
     </div>
 
     <!-- Modal -->
@@ -181,6 +227,11 @@ uri="http://java.sun.com/jsp/jstl/fmt"%>
       console.log(e.currentTarget.id);
       location.href = "/view?no=" + e.currentTarget.id;
     });
+
+    function search() {
+      const keyword = $("#keyword").val();
+      location.href = "/list?keyword=" + keyword;
+    }
   </script>
 </html>
 <!-- <fmt:parseDate
