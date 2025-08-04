@@ -6,7 +6,14 @@ WHERE USER_NO NOT IN (
     WHERE project_id = 1  -- 여기에 원하는 프로젝트 ID를 넣으세요
 );
 
+select * from project_task;
+
 select * from project_member;
+
+DELETE FROM project_member;
+
+SELECT * FROM project_task
+ORDER BY FIELD(priority, '높음', '보통', '낮음') DESC;
 
 select * from user_info;
 

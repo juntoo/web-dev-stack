@@ -68,7 +68,7 @@ CREATE TABLE project (
 
 select * from user_info;
 
-select * from project;
+select * from project_task;
 
 ALTER TABLE project
 MODIFY COLUMN status VARCHAR(30) 
@@ -220,3 +220,17 @@ SELECT * FROM product;
 select * from user_info;
 
 INSERT INTO user_info(id, password, name, phone, email, dept_name, position) values('admin', '1234', '관리자', '01011112222', "example@erp.com", '해외팀', '사장');
+
+SELECT
+	p.task_id,
+	p.project_id,
+	p.task_name,
+	p.assigned_to,
+	p.status,
+	p.start_date,
+	p.due_date,
+	p.priority,
+	u.name
+FROM project_task p
+JOIN user_info u
+ON p.assined_to=u.user_no;

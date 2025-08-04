@@ -20,3 +20,5 @@ CREATE TABLE user(
    name VARCHAR(100),
    role VARCHAR(20) DEFAULT 'ROLE_USER'
 );
+DROP TABLE user;
+select * from user;
