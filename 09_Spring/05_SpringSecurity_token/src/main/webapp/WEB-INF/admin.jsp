@@ -9,7 +9,6 @@
   </head>
   <body>
     <h1>관리자 페이지</h1>
-    <sec:authentication property="principal.name"/>
-    <p>${user.name}</p>
+    <p><sec:authentication property="principal.name"/> 페이지</p>
   </body>
 </html>

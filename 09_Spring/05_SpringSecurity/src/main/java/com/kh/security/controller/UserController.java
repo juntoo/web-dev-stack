@@ -8,7 +8,6 @@ import com.kh.security.model.vo.User;
 import com.kh.security.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
