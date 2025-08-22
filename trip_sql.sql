@@ -67,6 +67,24 @@ CREATE TABLE project (
 );
 
 select * from user_info;
+SELECT 
+	p.project_id,
+    p.project_name,
+    p.start_date,
+    p.end_date
+FROM project p
+JOIN project_member USING(project_id)
+JOIN user_info USING(user_no)
+WHERE user_no = 1;
+
+SELECT 
+			task_id taskId,
+		    task_name taskName,
+		    start_date startDate,
+		    due_date dueDate,
+		    priority
+		FROM project_task
+		WHERE assigned_to = 1;
 
 select * from project_task;
 
