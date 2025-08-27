@@ -66,6 +66,9 @@ CREATE TABLE project (
 	created_at     DATETIME DEFAULT CURRENT_TIMESTAMP -- 등록일시
 );
 
+ALTER TABLE project
+ADD project_detail TEXT COMMENT '프로젝트 상세 설명';
+
 select * from user_info;
 SELECT 
 	p.project_id,
