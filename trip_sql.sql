@@ -69,6 +69,8 @@ CREATE TABLE project (
 ALTER TABLE project
 ADD project_detail TEXT COMMENT '프로젝트 상세 설명';
 
+select * from product;
+
 select * from user_info;
 SELECT 
 	p.project_id,

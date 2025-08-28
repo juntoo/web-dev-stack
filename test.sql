@@ -19,7 +19,8 @@ CREATE TABLE product_planning (
 	project_id   INT NOT NULL,                   -- 연결된 프로젝트 ID
 	title        VARCHAR(100),                   -- 여행 상품명
 	destination  VARCHAR(100),                   -- 목적지
-	duration     INT,                            -- 여행 기간 (일 수)
+	start_date   DATE,
+	end_date     DATE,
 	price        INT                  -- 여행 가격
 );
 
