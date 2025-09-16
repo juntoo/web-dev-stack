@@ -2,51 +2,32 @@ import { useState } from "react";
 
 function App() {
 
-  let [menu, setMenu] = useState(null)
-  let content = null
-
-  if(menu !== null) content = menu+"을 선택함"
-  else content = "내용 없음"
+  let [selMenu, setSelMenu] = useState(null)
+  
+  let menuChange = (e)=>{
+    if(e.target.value != "") {
+      setSelMenu(e.target.value+" 을(를) 선택함")
+    } else{
+      setSelMenu("메뉴를 선택하세요")
+    }
+  }
 
   return (
     <div className="App">
-      <Header></Header>
-      <Select onChangeMenu={(menu)=>{
-        setMenu(menu)
-      }}></Select>
-      <Article content={content}></Article>
-    </div>
-  );
-}
 
-function Header() {
-  return (
-    <header>
-      <h1>메뉴 선택</h1>
-    </header>
-  );
-}
+      <h2>메뉴 선택</h2>
 
-function Select(props) {
-  return (
-    <div>
-      <select onChange={(e)=>{
-        props.onChangeMenu(e.target.value)
-      }}>
-        <option defaultValue={null} hidden>메뉴</option>
-        <option>짜장</option>
-        <option>짬뽕</option>
+      <select onChange={menuChange}>
+        <option value="">메뉴</option>
+        <option value="짜장">짜장</option>
+        <option value="짬뽕">짬뽕</option>
       </select>
+
+      <p style={ {color:'blue'} }>{selMenu}</p>
+
     </div>
   );
 }
 
-function Article(props) {
-  return (
-    <div>
-      <p>{props.content}</p>
-    </div>
-  );
-}
 
 export default App;
