@@ -1,0 +1,6 @@
+npm install -g npm@10.5.2 --force (처음에만)
+npx create-react-app .
+
+npm start
+
+npm install (노드 모듈 재설치)
