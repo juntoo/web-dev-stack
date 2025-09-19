@@ -22,3 +22,4 @@ CREATE TABLE user(
 );
 DROP TABLE user;
 select * from user;
+DELETE FROM project_member;
